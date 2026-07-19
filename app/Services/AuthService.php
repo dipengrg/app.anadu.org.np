@@ -16,8 +16,8 @@ class AuthService
         // 1. Clear out any old unexpired OTPs for this number
         OtpVerification::where('mobile_number', $mobileNumber)->delete();
 
-        // 2. Generate a secure 6-digit code
-        $otpCode = random_int(100000, 999999);
+        // 2. Generate a secure 4-digit code
+        $otpCode = random_int(1000, 9999);
 
         // 3. Save the temporary transaction row
         OtpVerification::create([
