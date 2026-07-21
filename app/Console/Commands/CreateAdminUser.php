@@ -25,7 +25,6 @@ class CreateAdminUser extends Command
         $this->info('--- Creates an administrative account ---');
 
         // 1. Gather interactive inputs
-        $name = $this->ask('Enter Administrator Name');
         $mobileNumber = $this->ask('Enter Mobile Number (10 digits)');
         $email = $this->ask('Enter Email Address');
 
@@ -55,14 +54,13 @@ class CreateAdminUser extends Command
 
         // 4. Create the system profile directly with the 'admin' role
         $user = new User();
-        $user->name = $name;
         $user->mobile_number = $mobileNumber;
         $user->email = $email;
-        $user->role = 'admin';  // Bypasses fillable rules completely
+        $user->role = 'admin';
         $user->is_active = true;
         $user->save();
 
-        $this->info("Success: Administrative profile created for {$user->name} ({$user->email}) with mobile number ({$user->mobile_number}).");
+        $this->info("Success: Administrative profile created for using mobile number ({$user->mobile_number}).");
         
         return Command::SUCCESS;
     }

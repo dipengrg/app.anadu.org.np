@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->enum('role', ['admin', 'moderator', 'general'])->default('general');
             $table->string('mobile_number')->unique();
-            $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
