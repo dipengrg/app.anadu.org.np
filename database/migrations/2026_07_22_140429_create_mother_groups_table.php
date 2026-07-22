@@ -11,26 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('committee_members', function (Blueprint $table) {
+        Schema::create('mother_groups', function (Blueprint $table) {
             $table->id();
-            
-            $table->foreignId('tenure_id')
-                    ->constrained('tenures')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
 
             $table->foreignId('profile_id')
+                    ->unique()
                     ->constrained('profiles')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
 
             $table->string('designation');
             $table->unsignedInteger('rank');
-            
-            $table->timestamps();
 
-            // Ensure a member cannot have the same designation in the same tenure
-            $table->unique(['tenure_id', 'profile_id', 'designation']);
+            $table->timestamps();
         });
     }
 
@@ -39,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('committee_members');
+        Schema::dropIfExists('mother_groups');
     }
 };
