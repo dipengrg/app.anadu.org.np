@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\CreateUserRequest;
 use App\Http\Requests\Api\V1\UpdateUserRequest;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class UserManagementController extends Controller
@@ -19,7 +19,7 @@ class UserManagementController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'data'   => $users
+            'data' => $users,
         ]);
     }
 
@@ -32,9 +32,9 @@ class UserManagementController extends Controller
         $user = User::forceCreate($request->validated());
 
         return response()->json([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'User profile created successfully.',
-            'data'    => $user
+            'data' => $user,
         ], 201);
     }
 
@@ -45,7 +45,7 @@ class UserManagementController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'data'   => $user
+            'data' => $user,
         ]);
     }
 
@@ -58,9 +58,9 @@ class UserManagementController extends Controller
         $user->forceFill($request->validated())->save();
 
         return response()->json([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'User profile updated successfully.',
-            'data'    => $user
+            'data' => $user,
         ]);
     }
 
@@ -70,18 +70,18 @@ class UserManagementController extends Controller
     public function destroy(User $user): JsonResponse
     {
         // Defensive check: Prevent the active Admin from accidentally deleting themselves
-        if (auth()->id === $user->id) {
+        if (auth()->id() === $user->id) {
             return response()->json([
-                'status'  => 'error',
-                'message' => 'Action denied. You cannot delete your own active session.'
+                'status' => 'error',
+                'message' => 'Action denied. You cannot delete your own active session.',
             ], 400);
         }
 
         $user->delete();
 
         return response()->json([
-            'status'  => 'success',
-            'message' => 'User profile has been permanently removed.'
+            'status' => 'success',
+            'message' => 'User profile has been permanently removed.',
         ]);
     }
 }

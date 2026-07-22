@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Services\AuthService;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\Api\V1\SendOtpRequest;
 use App\Http\Requests\Api\V1\VerifyOtpRequest;
+use App\Models\User;
+use App\Services\AuthService;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -27,7 +27,7 @@ class AuthController extends Controller
         $this->authService->generateAndSendOtp($request->validated()['mobile_number']);
 
         return response()->json([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => __('auth.otp.sent'),
         ], 200);
     }
@@ -39,13 +39,13 @@ class AuthController extends Controller
     {
         // The service processes validation details and returns either a token string or null
         $token = $this->authService->verifyOtpAndCreateToken(
-            $request->mobile_number, 
+            $request->mobile_number,
             $request->otp_code
         );
 
-        if (!$token) {
+        if (! $token) {
             return response()->json([
-                'status'  => 'error',
+                'status' => 'error',
                 'message' => __('auth.otp.invalid'),
             ], 422);
         }
@@ -55,12 +55,12 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'token'  => $token,
-            'user'   => [
-                'name'   => $user->name,
+            'token' => $token,
+            'user' => [
+                'name' => $user->profile?->name,
                 'mobile' => $user->mobile_number,
-                'role'   => $user->role,
-            ]
+                'role' => $user->role,
+            ],
         ], 200);
     }
 
@@ -71,7 +71,7 @@ class AuthController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'data'   => $request->user()
+            'data' => $request->user(),
         ]);
     }
 }
