@@ -27,7 +27,7 @@ return new class extends Migration
                     ->onDelete('cascade');
             
             $table->string('title')->nullable();
-            $table->string('full_name');
+            $table->string('name');
             $table->enum('gender', ['male', 'female']);
             $table->date('dob')->nullable();
             $table->string('photo')->nullable();
