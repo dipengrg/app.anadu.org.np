@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
 
             $table->boolean('is_root')->default(false);
-            $table->boolean('is_community_member')->default(true);
 
             $table->foreignId('profile_id')
                     ->unique()

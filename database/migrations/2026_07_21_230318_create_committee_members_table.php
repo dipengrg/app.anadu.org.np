@@ -13,24 +13,19 @@ return new class extends Migration
     {
         Schema::create('committee_members', function (Blueprint $table) {
             $table->id();
-            
-            $table->foreignId('tenure_id')
-                    ->constrained('tenures')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
 
             $table->foreignId('profile_id')
                     ->constrained('profiles')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
 
-            $table->string('designation');
             $table->unsignedInteger('rank');
-            
-            $table->timestamps();
+            $table->string('designation');
+            $table->enum('role', ['executive', 'general']);
+            $table->date('started_on');
+            $table->date('ended_on')->nullable();
 
-            // Ensure a member cannot have the same designation in the same tenure
-            $table->unique(['tenure_id', 'profile_id', 'designation']);
+            $table->timestamps();
         });
     }
 
