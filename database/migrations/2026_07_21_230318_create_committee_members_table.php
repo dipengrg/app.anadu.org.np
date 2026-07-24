@@ -19,7 +19,7 @@ return new class extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
 
-            $table->unsignedInteger('rank');
+            $table->enum('rank', [0, 1, 2, 3, 4, 5]);
             $table->string('designation');
             $table->enum('role', ['executive', 'general']);
             $table->date('started_on');

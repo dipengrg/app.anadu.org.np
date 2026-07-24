@@ -19,7 +19,7 @@ return new class extends Migration
                     ->onDelete('cascade');
 
             $table->string('title');
-            $table->text('description')->nullable();
+            $table->text('summary')->nullable();
             $table->date('scheduled_on');
             $table->timestamps();
         });

@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+#[Fillable(['event_session_id', 'profile_id', 'participation_tier_id', 'hours_contributed', 'calculated_points', 'remarks'])]
+#[Guarded(['id', 'created_at', 'updated_at'])]
 
 class EventSessionParticipation extends Model
 {
