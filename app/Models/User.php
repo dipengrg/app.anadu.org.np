@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +18,7 @@ use Laravel\Sanctum\HasApiTokens;
 #[Fillable(['role', 'mobile_number', 'email', 'is_active'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     protected function casts(): array
     {
@@ -45,5 +48,10 @@ class User extends Authenticatable
     public function profile(): HasOne
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return in_array($this->role, ['admin']);
     }
 }
