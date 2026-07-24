@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Storage;
 
 class Content extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'is_pinned' => 'boolean',
+        ];
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(ContentCategory::class, 'content_category_id');

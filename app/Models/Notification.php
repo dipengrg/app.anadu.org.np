@@ -12,6 +12,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Notification extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'scheduled_at' => 'datetime',
+        ];
+    }
+
     public function deliveries(): HasMany
     {
         return $this->hasMany(NotificationDelivery::class);

@@ -12,6 +12,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ParticipationTier extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'points' => 'integer',
+        ];
+    }
+
     /**
      * @return HasMany<EventSessionParticipation, $this>
      */

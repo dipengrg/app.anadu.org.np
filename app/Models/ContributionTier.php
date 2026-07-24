@@ -12,6 +12,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ContributionTier extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'points' => 'integer',
+        ];
+    }
+
     /**
      * @return HasMany<Contribution, $this>
      */

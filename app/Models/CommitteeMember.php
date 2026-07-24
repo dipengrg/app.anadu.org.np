@@ -12,6 +12,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CommitteeMember extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'rank' => 'integer',
+            'started_on' => 'date',
+            'ended_on' => 'date',
+        ];
+    }
+
     /**
      * @return BelongsTo<Profile, $this>
      */

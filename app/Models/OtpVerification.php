@@ -12,6 +12,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class OtpVerification extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'expires_at' => 'datetime',
+            'is_verified' => 'boolean',
+        ];
+    }
+
     /**
      * @param  Builder<OtpVerification>  $query
      * @return Builder<OtpVerification>

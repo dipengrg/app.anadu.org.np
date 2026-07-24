@@ -13,6 +13,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Event extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'scheduled_on' => 'date',
+        ];
+    }
+
     /**
      * @return BelongsTo<EventCategory, $this>
      */

@@ -12,6 +12,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Priest extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'rank' => 'integer',
+        ];
+    }
+
     /**
      * @return BelongsTo<Profile, $this>
      */

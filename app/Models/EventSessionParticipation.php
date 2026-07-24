@@ -12,6 +12,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EventSessionParticipation extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'hours_contributed' => 'decimal:2',
+            'calculated_points' => 'integer',
+        ];
+    }
+
     /**
      * @return BelongsTo<EventSession, $this>
      */

@@ -13,6 +13,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Profile extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'dob' => 'date',
+        ];
+    }
+
     /**
      * @return BelongsTo<Clan, $this>
      */

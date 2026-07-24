@@ -12,6 +12,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Contribution extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'received_on' => 'date',
+        ];
+    }
+
     /**
      * @return BelongsTo<Profile, $this>
      */
