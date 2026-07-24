@@ -26,19 +26,19 @@ return new class extends Migration
                     ->nullable()
                     ->constrained('profiles')
                     ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->onDelete('set null');
 
             $table->foreignId('mother_id')
                     ->nullable()
                     ->constrained('profiles')
                     ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->onDelete('set null');
 
             $table->foreignId('spouse_id')
                     ->nullable()
                     ->constrained('profiles')
                     ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->onDelete('set null');
 
             $table->timestamps();
         });

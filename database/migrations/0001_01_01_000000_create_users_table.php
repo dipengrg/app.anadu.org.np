@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+
+            $table->index(['mobile_number', 'email']);
         });
 
         Schema::create('sessions', function (Blueprint $table) {

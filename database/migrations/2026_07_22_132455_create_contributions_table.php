@@ -31,7 +31,8 @@ return new class extends Migration
                     ->onDelete('cascade');
 
             $table->string('title');
-            $table->text('description')->nullable();
+            $table->decimal('amount', 12, 2);
+            $table->text('summary')->nullable();
             $table->date('received_on');
             $table->timestamps();
         });

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['title', 'description'])]
+#[Fillable(['title', 'summary'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
 class ContributionCategory extends Model
