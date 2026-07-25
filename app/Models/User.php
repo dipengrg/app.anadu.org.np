@@ -46,14 +46,6 @@ class User extends Authenticatable implements FilamentUser
             : $initials;
     }
 
-    /**
-     * @return HasOne<Profile, $this>
-     */
-    public function profile(): HasOne
-    {
-        return $this->hasOne(Profile::class);
-    }
-
     public function canAccessPanel(Panel $panel): bool
     {
         return in_array($this->role, ['admin', 'moderator'], true);
