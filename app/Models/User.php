@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-use Laravel\Sanctum\HasApiTokens;
 
 #[Fillable(['role', 'name', 'email', 'password', 'is_active'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
@@ -33,7 +32,7 @@ class User extends Authenticatable implements FilamentUser
     }
 
     /** @use HasFactory<UserFactory> */
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
     /**
      * Get the user's initials
