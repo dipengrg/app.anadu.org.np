@@ -48,10 +48,12 @@ class UserResource extends Resource
                     ->unique(ignoreRecord: true),
                 TextInput::make('password')
                     ->password()
-                    ->dehydrateStateUsing(fn ($state) => filled($state) ? Hash::make($state) : null)
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create')
                     ->autocomplete('new-password')
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->helperText(fn (string $context): ?string => $context === 'edit' ? 'Leave blank to keep the current password.' : null),
                 Checkbox::make('is_active')
                     ->default(true),
             ]);
