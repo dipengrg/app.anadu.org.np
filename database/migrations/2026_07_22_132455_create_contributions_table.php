@@ -30,7 +30,7 @@ return new class extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
 
-            $table->string('title');
+            $table->string('external_donor_name')->nullable();
             $table->decimal('amount', 12, 2);
             $table->text('summary')->nullable();
             $table->date('received_on');
