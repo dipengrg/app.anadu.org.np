@@ -4,14 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Guarded;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 #[Fillable(['profile_id', 'member_id', 'rank', 'designation', 'role', 'started_on', 'ended_on'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
-
-class CommitteeMember extends Model
+class CommitteeMember extends Authenticatable
 {
+    use HasApiTokens;
+
     protected function casts(): array
     {
         return [

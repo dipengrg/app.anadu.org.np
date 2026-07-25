@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\User;
+use App\Models\CommitteeMember;
 use App\Models\OtpVerification;
 use Illuminate\Support\Facades\Log;
 
@@ -11,27 +11,26 @@ class AuthService
     /**
      * Handle the generation and sending logic for OTP.
      */
-    public function generateAndSendOtp(string $mobileNumber): void
+    public function generateAndSendOtp(string $memberId, string $phone): void
     {
-        // 1. Clear out any old unexpired OTPs for this number
-        OtpVerification::where('mobile_number', $mobileNumber)->delete();
+        OtpVerification::where('mobile_number', $phone)->delete();
 
-        // 2. Generate a secure 4-digit code
         $otpCode = random_int(1000, 9999);
 
-        // 3. Save the temporary transaction row
         OtpVerification::create([
-            'mobile_number' => $mobileNumber,
-            'otp_code'      => $otpCode,
-            'expires_at'    => now()->addMinutes(5),
+            'mobile_number' => $phone,
+            'otp_code' => $otpCode,
+            'expires_at' => now()->addMinutes(5),
         ]);
 
-        // 4. Defensive check: Only trigger SMS if the user exists and is active
-        $user = User::where('mobile_number', $mobileNumber)->where('is_active', true)->first();
+        $committeeMember = CommitteeMember::where('member_id', $memberId)
+            ->whereHas('profile', function ($query) use ($phone): void {
+                $query->where('phone', $phone);
+            })
+            ->first();
 
-        if ($user) {
-            // TODO: Integrate local SMS Gateway here
-            Log::info("OTP for {$mobileNumber}: {$otpCode}");
+        if ($committeeMember) {
+            Log::info("OTP for committee member {$memberId} on {$phone}: {$otpCode}");
         }
     }
 
@@ -39,29 +38,29 @@ class AuthService
      * Handle verification logic and issue a token if successful.
      * Returns the token string or null on failure.
      */
-    public function verifyOtpAndCreateToken(string $mobileNumber, string $otpCode): ?string
+    public function verifyOtpAndCreateToken(string $memberId, string $phone, string $otpCode): ?string
     {
-        // 1. Fetch active verification instance
-        $verification = OtpVerification::where('mobile_number', $mobileNumber)
+        $verification = OtpVerification::where('mobile_number', $phone)
             ->where('otp_code', $otpCode)
             ->where('expires_at', '>', now())
             ->first();
 
-        if (!$verification) {
+        if (! $verification) {
             return null;
         }
 
-        // 2. Verify permanent resident status
-        $user = User::where('mobile_number', $mobileNumber)->where('is_active', true)->first();
+        $committeeMember = CommitteeMember::where('member_id', $memberId)
+            ->whereHas('profile', function ($query) use ($phone): void {
+                $query->where('phone', $phone);
+            })
+            ->first();
 
-        if (!$user) {
+        if (! $committeeMember) {
             return null;
         }
 
-        // 3. Burn the used validation token immediately
         $verification->delete();
 
-        // 4. Generate long-lived Sanctum token
-        return $user->createToken('anadu-mobile-session')->plainTextToken;
+        return $committeeMember->createToken('anadu-mobile-session')->plainTextToken;
     }
 }

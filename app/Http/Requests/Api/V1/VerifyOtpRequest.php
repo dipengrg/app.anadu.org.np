@@ -23,7 +23,8 @@ class VerifyOtpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'mobile_number' => 'required|numeric|digits:10',
+            'member_id' => ['required', 'string', 'exists:committee_members,member_id'],
+            'phone' => ['required', 'string', 'regex:/^[0-9]{10}$/'],
             'otp_code' => 'required|numeric|digits:4',
         ];
     }

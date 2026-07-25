@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\SendOtpRequest;
 use App\Http\Requests\Api\V1\VerifyOtpRequest;
-use App\Models\User;
+use App\Models\CommitteeMember;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
 
@@ -24,7 +24,10 @@ class AuthController extends Controller
      */
     public function requestOtp(SendOtpRequest $request)
     {
-        $this->authService->generateAndSendOtp($request->validated()['mobile_number']);
+        $this->authService->generateAndSendOtp(
+            $request->validated()['member_id'],
+            $request->validated()['phone']
+        );
 
         return response()->json([
             'status' => 'success',
@@ -37,9 +40,9 @@ class AuthController extends Controller
      */
     public function verifyOtp(VerifyOtpRequest $request)
     {
-        // The service processes validation details and returns either a token string or null
         $token = $this->authService->verifyOtpAndCreateToken(
-            $request->mobile_number,
+            $request->member_id,
+            $request->phone,
             $request->otp_code
         );
 
@@ -50,16 +53,21 @@ class AuthController extends Controller
             ], 422);
         }
 
-        // Resolve user record cleanly for context response payload
-        $user = User::where('mobile_number', $request->mobile_number)->first();
+        $committeeMember = CommitteeMember::where('member_id', $request->member_id)
+            ->whereHas('profile', function ($query) use ($request): void {
+                $query->where('phone', $request->phone);
+            })
+            ->with('profile')
+            ->first();
 
         return response()->json([
             'status' => 'success',
             'token' => $token,
             'user' => [
-                'name' => $user->profile?->name,
-                'mobile' => $user->mobile_number,
-                'role' => $user->role,
+                'name' => $committeeMember?->profile?->name,
+                'member_id' => $committeeMember?->member_id,
+                'phone' => $committeeMember?->profile?->phone,
+                'role' => $committeeMember?->role,
             ],
         ], 200);
     }
