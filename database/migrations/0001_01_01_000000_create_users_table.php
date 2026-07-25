@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->enum('role', ['admin', 'moderator', 'general'])->default('general');
-            $table->string('mobile_number')->unique();
-            $table->string('email')->unique()->nullable();
+            $table->enum('role', ['admin', 'moderator'])->default('admin');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->boolean('is_active')->default(true);
+            $table->rememberToken();
             $table->timestamps();
-
-            $table->index(['mobile_number', 'email']);
         });
 
         Schema::create('sessions', function (Blueprint $table) {
@@ -30,6 +30,12 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        Schema::create('password_reset_tokens', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
     }
 
     /**
@@ -39,5 +45,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('users');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
     }
 };

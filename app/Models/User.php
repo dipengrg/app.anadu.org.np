@@ -12,11 +12,16 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
-#[Fillable(['role', 'mobile_number', 'email', 'is_active'])]
+#[Fillable(['role', 'name', 'email', 'password', 'is_active'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
 class User extends Authenticatable
 {
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
     protected function casts(): array
     {
         return [
