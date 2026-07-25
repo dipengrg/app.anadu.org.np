@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['user_id', 'clan_id', 'title', 'name', 'gender', 'dob', 'photo', 'phone', 'ancestral_address', 'residence_type'])]
+#[Fillable(['clan_id', 'title', 'name', 'gender', 'dob', 'photo', 'phone', 'ancestral_address', 'residence_type'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
 class Profile extends Model
