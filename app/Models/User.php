@@ -58,9 +58,4 @@ class User extends Authenticatable implements FilamentUser
     {
         return in_array($this->role, ['admin', 'moderator'], true);
     }
-
-    public function getFilamentName(): string
-    {
-        return $this->email ?? $this->mobile_number;
-    }
 }
