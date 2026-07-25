@@ -31,7 +31,6 @@ class ProfileSettings extends Page implements HasActions, HasSchemas
     protected string $view = 'filament.pages.profile-settings';
 
     public ?array $profileData = [];
-
     public ?array $passwordData = [];
 
     public function mount(): void
@@ -67,7 +66,7 @@ class ProfileSettings extends Page implements HasActions, HasSchemas
                     ])
                     ->footerActions([
                         Action::make('saveProfile')
-                            ->label('Save profile')
+                            ->label('Save Profile')
                             ->action('updateProfile'),
                     ]),
             ])
@@ -105,8 +104,7 @@ class ProfileSettings extends Page implements HasActions, HasSchemas
                     ])
                     ->footerActions([
                         Action::make('savePassword')
-                            ->label('Update password')
-                            ->color('gray')
+                            ->label('Update Password')
                             ->action('updatePassword'),
                     ]),
             ])
