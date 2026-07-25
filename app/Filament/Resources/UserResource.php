@@ -49,7 +49,6 @@ class UserResource extends Resource
                 TextInput::make('password')
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => filled($state) ? Hash::make($state) : null)
-                    ->dehydrateStateUsing(fn ($state) => filled($state) ? Hash::make($state) : null)
                     ->required(fn (string $context): bool => $context === 'create')
                     ->autocomplete('new-password')
                     ->maxLength(255),
