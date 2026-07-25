@@ -19,6 +19,7 @@ return new class extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
 
+            $table->string('member_id')->unique();
             $table->unsignedTinyInteger('rank');
             $table->string('designation');
             $table->enum('role', ['executive', 'general']);

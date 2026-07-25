@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['profile_id', 'rank', 'designation', 'role', 'started_on', 'ended_on'])]
+#[Fillable(['profile_id', 'member_id', 'rank', 'designation', 'role', 'started_on', 'ended_on'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
 class CommitteeMember extends Model
