@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\ProfileResource\Pages;
+namespace App\Filament\Resources\Profiles\Pages;
 
-use App\Filament\Resources\ProfileResource;
+use App\Filament\Resources\Profiles\ProfileResource;
 use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ManageRecords;
 
-class ListProfiles extends ListRecords
+class ManageProfiles extends ManageRecords
 {
     protected static string $resource = ProfileResource::class;
 
