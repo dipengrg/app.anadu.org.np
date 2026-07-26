@@ -4,7 +4,7 @@ namespace App\Filament\Resources\MotherGroups;
 
 use App\Filament\Resources\MotherGroups\Pages\ManageMotherGroups;
 use App\Models\MotherGroup;
-use BackedEnum;
+use UnitEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -13,7 +13,6 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -21,7 +20,9 @@ class MotherGroupResource extends Resource
 {
     protected static ?string $model = MotherGroup::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string | UnitEnum | null $navigationGroup = 'People & Membership';
+    protected static ?int $navigationSort = 4;
+    protected static ?string $navigationLabel = 'Mother Groups';
 
     public static function form(Schema $schema): Schema
     {
