@@ -4,7 +4,7 @@ namespace App\Filament\Resources\EventCategories;
 
 use App\Filament\Resources\EventCategories\Pages\ManageEventCategories;
 use App\Models\EventCategory;
-use BackedEnum;
+use UnitEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -12,7 +12,6 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -20,7 +19,9 @@ class EventCategoryResource extends Resource
 {
     protected static ?string $model = EventCategory::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';
+    protected static ?int $navigationSort = 5;
+    protected static ?string $navigationLabel = 'Event Categories';
 
     protected static ?string $recordTitleAttribute = 'title';
 
