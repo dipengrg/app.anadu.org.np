@@ -8,17 +8,18 @@ use App\Filament\Resources\ContentCategories\Pages\ListContentCategories;
 use App\Filament\Resources\ContentCategories\Schemas\ContentCategoryForm;
 use App\Filament\Resources\ContentCategories\Tables\ContentCategoriesTable;
 use App\Models\ContentCategory;
-use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class ContentCategoryResource extends Resource
 {
     protected static ?string $model = ContentCategory::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';
+    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationLabel = 'Content Categories';
 
     protected static ?string $recordTitleAttribute = 'title';
 
