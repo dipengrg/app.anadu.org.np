@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\ClanResource\Pages;
+namespace App\Filament\Resources\Clans\Pages;
 
-use App\Filament\Resources\ClanResource;
+use App\Filament\Resources\Clans\ClanResource;
 use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ManageRecords;
 
-class ListClans extends ListRecords
+class ManageClans extends ManageRecords
 {
     protected static string $resource = ClanResource::class;
 
