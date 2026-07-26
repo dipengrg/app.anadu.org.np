@@ -9,6 +9,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
@@ -29,6 +30,8 @@ class UserResource extends Resource
     {
         return $schema
             ->components([
+                Hidden::make('role')
+                    ->default('moderator'),
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
