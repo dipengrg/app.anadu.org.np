@@ -41,6 +41,9 @@ class AdminPanelProvider extends PanelProvider
 
             ->navigationGroups([
                 NavigationGroup::make()
+                    ->label('My Account')
+                    ->icon(Heroicon::OutlinedUserCircle),
+                NavigationGroup::make()
                     ->label('People & Membership')
                     ->icon(Heroicon::OutlinedUsers),
                 NavigationGroup::make()
