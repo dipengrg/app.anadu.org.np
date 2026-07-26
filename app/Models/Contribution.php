@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['profile_id', 'contribution_category_id', 'contribution_tier_id', 'external_donor_name', 'summary', 'received_on'])]
+#[Fillable(['profile_id', 'contribution_category_id', 'contribution_tier_id', 'external_donor_name', 'amount', 'summary', 'received_on'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
 class Contribution extends Model
