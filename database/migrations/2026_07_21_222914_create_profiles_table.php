@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('gender', ['male', 'female']);
             $table->date('dob')->nullable();
+            $table->enum('marital_status', ['single', 'married'])->default('single');
             $table->string('photo')->nullable();
             $table->string('phone')->nullable();
             $table->enum('ancestral_address', ['kodi', 'manikharka', 'mulbari', 'saudara', 'andara']);
