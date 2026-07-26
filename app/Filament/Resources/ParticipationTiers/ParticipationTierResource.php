@@ -4,7 +4,7 @@ namespace App\Filament\Resources\ParticipationTiers;
 
 use App\Filament\Resources\ParticipationTiers\Pages\ManageParticipationTiers;
 use App\Models\ParticipationTier;
-use BackedEnum;
+use UnitEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -13,7 +13,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -21,7 +20,9 @@ class ParticipationTierResource extends Resource
 {
     protected static ?string $model = ParticipationTier::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';
+    protected static ?int $navigationSort = 6;
+    protected static ?string $navigationLabel = 'Participation Tiers';
 
     protected static ?string $recordTitleAttribute = 'title';
 

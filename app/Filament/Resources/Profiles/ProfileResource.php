@@ -4,7 +4,7 @@ namespace App\Filament\Resources\Profiles;
 
 use App\Filament\Resources\Profiles\Pages\ManageProfiles;
 use App\Models\Profile;
-use BackedEnum;
+use UnitEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -17,7 +17,6 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\ImageColumn;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -25,7 +24,9 @@ class ProfileResource extends Resource
 {
     protected static ?string $model = Profile::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string | UnitEnum | null $navigationGroup = 'People & Membership';
+    protected static ?int $navigationSort = 1;
+    protected static ?string $navigationLabel = 'Profile Management';
 
     protected static ?string $recordTitleAttribute = 'name';
 
