@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable(['clan_id', 'title', 'name', 'gender', 'dob', 'photo', 'phone', 'ancestral_address', 'residence_type'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
@@ -34,6 +35,14 @@ class Profile extends Model
     public function committeeRoles(): HasMany
     {
         return $this->hasMany(CommitteeMember::class);
+    }
+
+    /**
+     * @return HasOne<MotherGroup, $this>
+     */
+    public function motherGroup(): HasOne
+    {
+        return $this->hasOne(MotherGroup::class);
     }
 
     /**
