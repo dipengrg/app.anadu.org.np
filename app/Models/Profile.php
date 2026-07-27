@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Barga;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-#[Fillable(['clan_id', 'title', 'name', 'gender', 'dob', 'photo', 'phone', 'ancestral_address', 'residence_type', 'deceased_on'])]
+#[Fillable(['clan_id', 'title', 'name', 'gender', 'dob', 'barga', 'photo', 'phone', 'ancestral_address', 'residence_type', 'deceased_on'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
 class Profile extends Model
@@ -18,6 +19,7 @@ class Profile extends Model
     {
         return [
             'dob' => 'date',
+            'barga' => Barga::class,
         ];
     }
 
