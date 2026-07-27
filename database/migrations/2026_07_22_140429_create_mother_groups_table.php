@@ -16,9 +16,9 @@ return new class extends Migration
 
             $table->foreignId('profile_id')
                     ->unique()
-                    ->constrained('profiles')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
 
             $table->string('designation');
             $table->unsignedInteger('rank');

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('profile_id')
-                    ->constrained('profiles')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
 
             $table->string('member_id')->unique();
             $table->unsignedTinyInteger('rank');
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('role', ['executive', 'general']);
             $table->date('started_on');
             $table->date('ended_on')->nullable();
+            $table->string('end_reason')->nullable();
 
             $table->timestamps();
         });

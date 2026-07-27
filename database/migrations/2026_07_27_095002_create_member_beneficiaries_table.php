@@ -11,22 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notification_deliveries', function (Blueprint $table) {
+        Schema::create('member_beneficiaries', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('notification_id')
+            $table->foreignId('committee_member_id')
                     ->constrained()
                     ->cascadeOnUpdate()
-                    ->cascadeOnDelete();
+                    ->restrictOnDelete();
 
             $table->foreignId('profile_id')
                     ->constrained()
                     ->cascadeOnUpdate()
-                    ->cascadeOnDelete();
+                    ->restrictOnDelete();
 
-            $table->enum('status', ['queued', 'sent', 'delivered', 'failed'])->default('queued');
-            $table->string('provider_message_id')->nullable();
             $table->timestamps();
+
+            $table->unique(['committee_member_id', 'profile_id']);
         });
     }
 
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notification_deliveries');
+        Schema::dropIfExists('member_beneficiaries');
     }
 };
