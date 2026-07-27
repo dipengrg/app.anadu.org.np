@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-#[Fillable(['clan_id', 'title', 'name', 'gender', 'dob', 'photo', 'phone', 'ancestral_address', 'residence_type'])]
+#[Fillable(['clan_id', 'title', 'name', 'gender', 'dob', 'photo', 'phone', 'ancestral_address', 'residence_type', 'deceased_on'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
 class Profile extends Model

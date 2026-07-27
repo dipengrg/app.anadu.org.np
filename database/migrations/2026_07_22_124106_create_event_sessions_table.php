@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('event_sessions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('event_id')
-                    ->constrained('events')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
             
             $table->string('title');
             $table->timestamps();
