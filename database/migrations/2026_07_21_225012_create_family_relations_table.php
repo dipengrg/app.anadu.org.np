@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('family_trees', function (Blueprint $table) {
+        Schema::create('family_relations', function (Blueprint $table) {
             $table->id();
 
             $table->boolean('is_root')->default(false);
