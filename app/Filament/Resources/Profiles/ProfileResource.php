@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Profiles;
 
+use App\Enums\Barga;
 use App\Filament\Resources\Profiles\Pages\ManageProfiles;
 use App\Models\Profile;
 use UnitEnum;
@@ -38,12 +39,17 @@ class ProfileResource extends Resource
                     ->relationship('clan', 'title')
                     ->required(),
                 TextInput::make('title')
-                    ->helperText('Optional honorific, e.g. Mr., Mrs., Dr.'),
+                    ->helperText('Capt., Maj., Dr., Mr., Mrs., Ms., etc.'),
                 TextInput::make('name')
                     ->required(),
                 Select::make('gender')
                     ->options(['male' => 'Male', 'female' => 'Female'])
                     ->required(),
+                Select::make('lho_barga')
+                    ->label('Lho / Barga')
+                    ->options(Barga::class)
+                    ->enum(Barga::class)
+                    ->searchable(),
                 DatePicker::make('dob')
                     ->maxDate(now()),
                 Section::make('photo')
@@ -89,6 +95,10 @@ class ProfileResource extends Resource
                     ->badge(),
                 TextColumn::make('dob')
                     ->date()
+                    ->sortable(),
+                TextColumn::make('barga')
+                    ->label('Barga (Lho)')
+                    ->badge()
                     ->sortable(),
                 TextColumn::make('phone')
                     ->searchable(),
