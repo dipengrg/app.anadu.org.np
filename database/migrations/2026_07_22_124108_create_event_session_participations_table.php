@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('event_session_participations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('event_session_id')
-                    ->constrained('event_sessions')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
             $table->foreignId('profile_id')
-                    ->constrained('profiles')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
             $table->foreignId('participation_tier_id')
-                    ->constrained('participation_tiers')
-                    ->onUpdate('cascade')
+                    ->constrained()
+                    ->cascadeOnUpdate()
                     ->onDelete('restrict');
             $table->decimal('hours_contributed', 4, 2)->default(1.00);
             $table->unsignedInteger('calculated_points');

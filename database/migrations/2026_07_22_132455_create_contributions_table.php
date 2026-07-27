@@ -16,19 +16,19 @@ return new class extends Migration
 
             $table->foreignId('profile_id')
                     ->nullable()
-                    ->constrained('profiles')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
 
             $table->foreignId('contribution_category_id')
-                    ->constrained('contribution_categories')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
 
             $table->foreignId('contribution_tier_id')
-                    ->constrained('contribution_tiers')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
 
             $table->string('external_donor_name')->nullable();
             $table->decimal('amount', 12, 2);

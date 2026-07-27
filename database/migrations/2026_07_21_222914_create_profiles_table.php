@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('clan_id')
-                    ->constrained('clans')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
             
             $table->string('title')->nullable();
             $table->string('name');
@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->enum('ancestral_address', ['kodi', 'manikharka', 'mulbari', 'saudara', 'andara']);
             $table->enum('residence_type', ['local', 'city', 'abroad']);
+            $table->date('deceased_on')->nullable();
 
             $table->timestamps();
         });

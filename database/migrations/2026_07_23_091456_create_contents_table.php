@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('content_category_id')
-                    ->constrained('content_categories')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
 
             $table->string('title');
             $table->string('summary', 500)->nullable();
