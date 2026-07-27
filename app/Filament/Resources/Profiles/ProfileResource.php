@@ -52,6 +52,10 @@ class ProfileResource extends Resource
                     ->searchable(),
                 DatePicker::make('dob')
                     ->maxDate(now()),
+                Select::make('marital_status')
+                    ->options(['single' => 'Single', 'married' => 'Married'])
+                    ->default('single')
+                    ->required(),
                 Section::make('photo')
                     ->schema([
                         FileUpload::make('photo')
@@ -92,6 +96,8 @@ class ProfileResource extends Resource
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('gender')
+                    ->badge(),
+                TextColumn::make('marital_status')
                     ->badge(),
                 TextColumn::make('dob')
                     ->date()
