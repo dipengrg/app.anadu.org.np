@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('gender', ['male', 'female']);
             $table->date('dob')->nullable();
-            $table->unsignedTinyInteger('barga')->nullable();
+            $table->enum('marital_status', ['single', 'married'])->nullable();
             $table->string('photo')->nullable();
             $table->date('deceased_on')->nullable();
             $table->timestamps();
