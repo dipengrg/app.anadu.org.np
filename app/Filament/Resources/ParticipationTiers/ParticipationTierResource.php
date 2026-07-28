@@ -24,7 +24,7 @@ class ParticipationTierResource extends Resource
     protected static ?string $model = ParticipationTier::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 7;
     protected static ?string $navigationLabel = 'Participation Tiers';
 
     protected static ?string $recordTitleAttribute = 'title';

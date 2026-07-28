@@ -27,7 +27,7 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = 8;
     protected static ?string $navigationLabel = 'Moderator Management';
 
     public static function form(Schema $schema): Schema

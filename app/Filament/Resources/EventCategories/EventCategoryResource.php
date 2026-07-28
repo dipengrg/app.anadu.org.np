@@ -23,7 +23,7 @@ class EventCategoryResource extends Resource
     protected static ?string $model = EventCategory::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 6;
     protected static ?string $navigationLabel = 'Event Categories';
 
     protected static ?string $recordTitleAttribute = 'title';
