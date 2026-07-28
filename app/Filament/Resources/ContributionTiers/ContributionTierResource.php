@@ -24,7 +24,7 @@ class ContributionTierResource extends Resource
     protected static ?string $model = ContributionTier::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 5;
     protected static ?string $navigationLabel = 'Contribution Tiers';
 
     protected static ?string $recordTitleAttribute = 'title';

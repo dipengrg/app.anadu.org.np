@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\Barga;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-#[Fillable(['title', 'name', 'gender', 'dob', 'barga', 'photo', 'phone', 'deceased_on'])]
+#[Fillable(['zodiac_id', 'title', 'name', 'gender', 'dob', 'photo', 'phone', 'deceased_on'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
 class Profile extends Model
@@ -18,8 +17,7 @@ class Profile extends Model
     protected function casts(): array
     {
         return [
-            'dob' => 'date',
-            'barga' => Barga::class,
+            'dob' => 'date'
         ];
     }
 
@@ -53,6 +51,14 @@ class Profile extends Model
     public function sessionParticipations(): HasMany
     {
         return $this->hasMany(EventSessionParticipation::class);
+    }
+
+    /**
+     * @return BelongsTo<Zodiac, $this>
+     */
+    public function zodiac(): BelongsTo
+    {
+        return $this->belongsTo(Zodiac::class);
     }
 
     public function getTotalSocialScoreAttribute(): int

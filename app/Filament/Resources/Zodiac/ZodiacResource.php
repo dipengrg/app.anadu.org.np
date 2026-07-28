@@ -1,31 +1,32 @@
 <?php
 
-namespace App\Filament\Resources\ContributionCategories;
+namespace App\Filament\Resources\Clans;
 
 use App\Filament\Resources\Concerns\RestrictedToAdmins;
-use App\Filament\Resources\ContributionCategories\Pages\ManageContributionCategories;
-use App\Models\ContributionCategory;
+use App\Filament\Resources\Zodiac\Pages\ManageZodiacs;
+use App\Models\Zodiac;
 use UnitEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class ContributionCategoryResource extends Resource
+class ZodiacResource extends Resource
 {
     use RestrictedToAdmins;
-    
-    protected static ?string $model = ContributionCategory::class;
+
+    protected static ?string $model = Zodiac::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';
-    protected static ?int $navigationSort = 4;
-    protected static ?string $navigationLabel = 'Contribution Categories';
+    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationLabel = 'Zodiac Management';
+
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Schema $schema): Schema
     {
@@ -33,14 +34,13 @@ class ContributionCategoryResource extends Resource
             ->components([
                 TextInput::make('title')
                     ->required(),
-                Textarea::make('summary')
-                    ->columnSpanFull(),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->recordTitleAttribute('title')
             ->columns([
                 TextColumn::make('title')
                     ->searchable(),
@@ -70,7 +70,7 @@ class ContributionCategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ManageContributionCategories::route('/'),
+            'index' => ManageZodiacs::route('/'),
         ];
     }
 }
