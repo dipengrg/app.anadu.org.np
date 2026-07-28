@@ -29,7 +29,9 @@ class MotherGroupResource extends Resource
         return $schema
             ->components([
                 Select::make('profile_id')
-                    ->relationship('profile', 'name')
+                    ->relationship('profile', 'name', fn ($query) => $query->where('gender', 'female'))
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 TextInput::make('designation')
                     ->required(),
