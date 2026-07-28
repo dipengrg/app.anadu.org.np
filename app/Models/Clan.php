@@ -13,10 +13,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Clan extends Model
 {
     /**
-     * @return HasMany<Profile, $this>
+     * @return HasMany<Member, $this>
      */
-    public function profiles(): HasMany
+    public function members(): HasMany
     {
-        return $this->hasMany(Profile::class);
+        return $this->hasMany(Member::class);
     }
 }

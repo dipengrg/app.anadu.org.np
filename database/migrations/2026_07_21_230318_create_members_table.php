@@ -19,10 +19,18 @@ return new class extends Migration
                     ->cascadeOnUpdate()
                     ->restrictOnDelete();
 
+            $table->foreignId('clan_id')
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
+
             $table->string('mid')->unique();
+            $table->string('phone')->nullable();
             $table->unsignedTinyInteger('rank');
             $table->string('designation');
             $table->enum('role', ['executive', 'general']);
+            $table->enum('ancestral_address', ['kodi', 'manikharka', 'mulbari', 'saudara', 'andara']);
+            $table->enum('residence_type', ['local', 'city', 'abroad']);
             $table->date('started_on');
             $table->date('ended_on')->nullable();
             $table->string('end_reason')->nullable();

@@ -35,11 +35,8 @@ class ProfileResource extends Resource
     {
         return $schema
             ->components([
-                Select::make('clan_id')
-                    ->relationship('clan', 'title')
-                    ->required(),
                 TextInput::make('title')
-                    ->helperText('Capt., Maj., Dr., Mr., Mrs., Ms., etc.'),
+                    ->helperText('Mr., Mrs., Ms. or Rank.'),
                 TextInput::make('name')
                     ->required(),
                 Select::make('gender')
@@ -63,21 +60,7 @@ class ProfileResource extends Resource
                             ->avatar()
                             ->directory('profile-photos')
                             ->visibility('public'),
-                    ]),
-                TextInput::make('phone')
-                    ->tel(),
-                Select::make('ancestral_address')
-                    ->options([
-                        'kodi' => 'Kodi',
-                        'manikharka' => 'Manikharka',
-                        'mulbari' => 'Mulbari',
-                        'saudara' => 'Saudara',
-                        'andara' => 'Andara',
                     ])
-                    ->required(),
-                Select::make('residence_type')
-                    ->options(['local' => 'Local', 'city' => 'City', 'abroad' => 'Abroad'])
-                    ->required(),
             ]);
     }
 
@@ -89,8 +72,6 @@ class ProfileResource extends Resource
                 ImageColumn::make('photo')
                     ->circular()
                     ->defaultImageUrl(fn () => 'https://ui-avatars.com/api/?name=Member&background=random'),
-                TextColumn::make('clan.title')
-                    ->searchable(),
                 TextColumn::make('title')
                     ->searchable(),
                 TextColumn::make('name')
@@ -106,12 +87,6 @@ class ProfileResource extends Resource
                     ->label('Barga (Lho)')
                     ->badge()
                     ->sortable(),
-                TextColumn::make('phone')
-                    ->searchable(),
-                TextColumn::make('ancestral_address')
-                    ->badge(),
-                TextColumn::make('residence_type')
-                    ->badge(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

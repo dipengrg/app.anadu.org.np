@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-#[Fillable(['profile_id', 'mid', 'rank', 'designation', 'role', 'started_on', 'ended_on', 'end_reason'])]
+#[Fillable(['profile_id', 'clan_id', 'mid', 'rank', 'designation', 'role', 'ancestral_address', 'residence_type', 'started_on', 'ended_on', 'end_reason'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
 class Member extends Authenticatable
@@ -27,5 +27,13 @@ class Member extends Authenticatable
     public function profile(): BelongsTo
     {
         return $this->belongsTo(Profile::class);
+    }
+
+    /**
+     * @return BelongsTo<Clan, $this>
+     */
+    public function clan(): BelongsTo
+    {
+        return $this->belongsTo(Clan::class);
     }
 }
