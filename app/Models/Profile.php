@@ -32,11 +32,11 @@ class Profile extends Model
     }
 
     /**
-     * @return HasMany<CommitteeMember, $this>
+     * @return HasMany<Member, $this>
      */
-    public function committeeRoles(): HasMany
+    public function communityRoles(): HasMany
     {
-        return $this->hasMany(CommitteeMember::class);
+        return $this->hasMany(Member::class);
     }
 
     /**

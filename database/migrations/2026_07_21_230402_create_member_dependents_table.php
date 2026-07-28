@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('member_beneficiaries', function (Blueprint $table) {
+        Schema::create('member_dependents', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('committee_member_id')
+            $table->foreignId('member_id')
                     ->constrained()
                     ->cascadeOnUpdate()
                     ->restrictOnDelete();
@@ -26,7 +26,7 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->unique(['committee_member_id', 'profile_id']);
+            $table->unique(['member_id', 'profile_id']);
         });
     }
 
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('member_beneficiaries');
+        Schema::dropIfExists('member_dependents');
     }
 };

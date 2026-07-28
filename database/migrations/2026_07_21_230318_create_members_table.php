@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('committee_members', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('profile_id')
@@ -19,7 +19,7 @@ return new class extends Migration
                     ->cascadeOnUpdate()
                     ->restrictOnDelete();
 
-            $table->string('member_id')->unique();
+            $table->string('mid')->unique();
             $table->unsignedTinyInteger('rank');
             $table->string('designation');
             $table->enum('role', ['executive', 'general']);
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('committee_members');
+        Schema::dropIfExists('members');
     }
 };
