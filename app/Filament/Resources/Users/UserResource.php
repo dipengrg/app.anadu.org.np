@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users;
 
+use App\Filament\Resources\Concerns\RestrictedToAdmins;
 use App\Filament\Resources\Users\Pages\ManageUsers;
 use App\Models\User;
 use UnitEnum;
@@ -21,6 +22,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
+    use RestrictedToAdmins;
+    
     protected static ?string $model = User::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';

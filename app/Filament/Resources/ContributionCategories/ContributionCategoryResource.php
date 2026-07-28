@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ContributionCategories;
 
+use App\Filament\Resources\Concerns\RestrictedToAdmins;
 use App\Filament\Resources\ContributionCategories\Pages\ManageContributionCategories;
 use App\Models\ContributionCategory;
 use UnitEnum;
@@ -18,6 +19,8 @@ use Filament\Tables\Table;
 
 class ContributionCategoryResource extends Resource
 {
+    use RestrictedToAdmins;
+    
     protected static ?string $model = ContributionCategory::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';
