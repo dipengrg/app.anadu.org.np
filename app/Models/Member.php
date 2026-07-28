@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-#[Fillable(['profile_id', 'member_id', 'rank', 'designation', 'role', 'started_on', 'ended_on', 'end_reason'])]
+#[Fillable(['profile_id', 'mid', 'rank', 'designation', 'role', 'started_on', 'ended_on', 'end_reason'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
-class CommitteeMember extends Authenticatable
+
+class Member extends Authenticatable
 {
     protected function casts(): array
     {

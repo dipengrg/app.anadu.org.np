@@ -3,7 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Clan;
-use App\Models\CommitteeMember;
+use App\Models\Member;
 use App\Models\Profile;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -23,7 +23,7 @@ class CommunityStatsOverview extends BaseWidget
                 ->descriptionIcon('heroicon-m-rectangle-group')
                 ->color('info'),
 
-            Stat::make('Committee Members', CommitteeMember::query()
+            Stat::make('Committee Members', Member::query()
                 ->where(function ($query) {
                     $query->whereNull('ended_on')
                         ->orWhere('ended_on', '>=', now()->toDateString());
