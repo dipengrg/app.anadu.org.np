@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-#[Fillable(['clan_id', 'title', 'name', 'gender', 'dob', 'photo', 'phone', 'ancestral_address', 'residence_type'])]
+#[Fillable(['zodiac_id', 'title', 'name', 'gender', 'dob', 'photo', 'phone', 'deceased_on'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
 class Profile extends Model
@@ -17,24 +17,16 @@ class Profile extends Model
     protected function casts(): array
     {
         return [
-            'dob' => 'date',
+            'dob' => 'date'
         ];
     }
 
     /**
-     * @return BelongsTo<Clan, $this>
+     * @return HasMany<Member, $this>
      */
-    public function clan(): BelongsTo
+    public function communityRoles(): HasMany
     {
-        return $this->belongsTo(Clan::class);
-    }
-
-    /**
-     * @return HasMany<CommitteeMember, $this>
-     */
-    public function committeeRoles(): HasMany
-    {
-        return $this->hasMany(CommitteeMember::class);
+        return $this->hasMany(Member::class);
     }
 
     /**
@@ -46,11 +38,27 @@ class Profile extends Model
     }
 
     /**
+     * @return HasOne<FamilyRelation, $this>
+     */
+    public function familyRelation(): HasOne
+    {
+        return $this->hasOne(FamilyRelation::class);
+    }
+
+    /**
      * @return HasMany<EventSessionParticipation, $this>
      */
     public function sessionParticipations(): HasMany
     {
         return $this->hasMany(EventSessionParticipation::class);
+    }
+
+    /**
+     * @return BelongsTo<Zodiac, $this>
+     */
+    public function zodiac(): BelongsTo
+    {
+        return $this->belongsTo(Zodiac::class);
     }
 
     public function getTotalSocialScoreAttribute(): int

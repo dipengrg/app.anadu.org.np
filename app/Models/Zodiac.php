@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['title'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
-class Clan extends Model
+class Zodiac extends Model
 {
     /**
-     * @return HasMany<Member, $this>
+     * @return HasMany<Profile, $this>
      */
-    public function members(): HasMany
+    public function profiles(): HasMany
     {
-        return $this->hasMany(Member::class);
+        return $this->hasMany(Profile::class);
     }
 }

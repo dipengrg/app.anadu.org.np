@@ -11,20 +11,29 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('committee_members', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('profile_id')
-                    ->constrained('profiles')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
 
-            $table->string('member_id')->unique();
+            $table->foreignId('clan_id')
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
+
+            $table->string('mid')->unique();
+            $table->string('phone')->nullable();
             $table->unsignedTinyInteger('rank');
             $table->string('designation');
             $table->enum('role', ['executive', 'general']);
+            $table->enum('ancestral_address', ['kodi', 'manikharka', 'mulbari', 'saudara', 'andara']);
+            $table->enum('residence_type', ['local', 'city', 'abroad']);
             $table->date('started_on');
             $table->date('ended_on')->nullable();
+            $table->string('end_reason')->nullable();
 
             $table->timestamps();
         });
@@ -35,6 +44,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('committee_members');
+        Schema::dropIfExists('members');
     }
 };
