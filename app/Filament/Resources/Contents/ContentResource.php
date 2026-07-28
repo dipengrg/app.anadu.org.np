@@ -10,6 +10,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -34,9 +35,9 @@ class ContentResource extends Resource
     {
         return $schema
             ->components([
-                TextInput::make('content_category_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('content_category_id')
+                    ->relationship('category', 'title')
+                    ->required(),
                 TextInput::make('title')
                     ->required(),
                 TextInput::make('summary'),
@@ -55,14 +56,13 @@ class ContentResource extends Resource
         return $table
             ->recordTitleAttribute('title')
             ->columns([
-                TextColumn::make('content_category_id')
+                TextColumn::make('category.title')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('title')
                     ->searchable(),
                 TextColumn::make('summary')
                     ->searchable(),
-                ImageColumn::make('header_image_path'),
                 IconColumn::make('is_pinned')
                     ->boolean(),
                 TextColumn::make('created_at')
