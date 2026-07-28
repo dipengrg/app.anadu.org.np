@@ -11,6 +11,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -31,9 +32,9 @@ class EventResource extends Resource
     {
         return $schema
             ->components([
-                TextInput::make('event_category_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('event_category_id')
+                    ->relationship('category', 'title')
+                    ->required(),
                 TextInput::make('title')
                     ->required(),
                 Textarea::make('summary')
@@ -48,7 +49,7 @@ class EventResource extends Resource
         return $table
             ->recordTitleAttribute('title')
             ->columns([
-                TextColumn::make('event_category_id')
+                TextColumn::make('category.title')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('title')
