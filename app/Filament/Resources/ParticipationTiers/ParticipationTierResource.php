@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ParticipationTiers;
 
+use App\Filament\Resources\Concerns\RestrictedToAdmins;
 use App\Filament\Resources\ParticipationTiers\Pages\ManageParticipationTiers;
 use App\Models\ParticipationTier;
 use UnitEnum;
@@ -18,6 +19,8 @@ use Filament\Tables\Table;
 
 class ParticipationTierResource extends Resource
 {
+    use RestrictedToAdmins;
+    
     protected static ?string $model = ParticipationTier::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';

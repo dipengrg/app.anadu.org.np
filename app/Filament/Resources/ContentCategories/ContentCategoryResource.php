@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ContentCategories;
 
+use App\Filament\Resources\Concerns\RestrictedToAdmins;
 use App\Filament\Resources\ContentCategories\Pages\CreateContentCategory;
 use App\Filament\Resources\ContentCategories\Pages\EditContentCategory;
 use App\Filament\Resources\ContentCategories\Pages\ListContentCategories;
@@ -15,6 +16,8 @@ use Filament\Tables\Table;
 
 class ContentCategoryResource extends Resource
 {
+    use RestrictedToAdmins;
+
     protected static ?string $model = ContentCategory::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';
