@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-#[Fillable(['clan_id', 'title', 'name', 'gender', 'dob', 'barga', 'photo', 'phone', 'ancestral_address', 'residence_type', 'deceased_on'])]
+#[Fillable(['title', 'name', 'gender', 'dob', 'barga', 'photo', 'phone', 'deceased_on'])]
 #[Guarded(['id', 'created_at', 'updated_at'])]
 
 class Profile extends Model
@@ -21,14 +21,6 @@ class Profile extends Model
             'dob' => 'date',
             'barga' => Barga::class,
         ];
-    }
-
-    /**
-     * @return BelongsTo<Clan, $this>
-     */
-    public function clan(): BelongsTo
-    {
-        return $this->belongsTo(Clan::class);
     }
 
     /**
