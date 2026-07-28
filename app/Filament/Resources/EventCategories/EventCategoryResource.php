@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\EventCategories;
 
+use App\Filament\Resources\Concerns\RestrictedToAdmins;
 use App\Filament\Resources\EventCategories\Pages\ManageEventCategories;
 use App\Models\EventCategory;
 use UnitEnum;
@@ -17,10 +18,12 @@ use Filament\Tables\Table;
 
 class EventCategoryResource extends Resource
 {
+    use RestrictedToAdmins;
+    
     protected static ?string $model = EventCategory::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 6;
     protected static ?string $navigationLabel = 'Event Categories';
 
     protected static ?string $recordTitleAttribute = 'title';

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Clans;
 
+use App\Filament\Resources\Concerns\RestrictedToAdmins;
 use App\Filament\Resources\Clans\Pages\ManageClans;
 use App\Models\Clan;
 use UnitEnum;
@@ -17,6 +18,8 @@ use Filament\Tables\Table;
 
 class ClanResource extends Resource
 {
+    use RestrictedToAdmins;
+
     protected static ?string $model = Clan::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';

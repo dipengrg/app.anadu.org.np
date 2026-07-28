@@ -11,33 +11,33 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('family_trees', function (Blueprint $table) {
+        Schema::create('family_relations', function (Blueprint $table) {
             $table->id();
 
             $table->boolean('is_root')->default(false);
 
             $table->foreignId('profile_id')
                     ->unique()
-                    ->constrained('profiles')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
             
             $table->foreignId('father_id')
                     ->nullable()
                     ->constrained('profiles')
-                    ->onUpdate('cascade')
+                    ->cascadeOnUpdate()
                     ->onDelete('set null');
 
             $table->foreignId('mother_id')
                     ->nullable()
                     ->constrained('profiles')
-                    ->onUpdate('cascade')
+                    ->cascadeOnUpdate()
                     ->onDelete('set null');
 
             $table->foreignId('spouse_id')
                     ->nullable()
                     ->constrained('profiles')
-                    ->onUpdate('cascade')
+                    ->cascadeOnUpdate()
                     ->onDelete('set null');
 
             $table->timestamps();

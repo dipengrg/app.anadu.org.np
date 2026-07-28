@@ -1,33 +1,30 @@
 <?php
 
-namespace App\Filament\Resources\Contents;
+namespace App\Filament\Resources\Events;
 
-use App\Filament\Resources\Contents\Pages\ManageContents;
-use App\Models\Content;
+use App\Filament\Resources\Events\Pages\ManageEvents;
+use App\Models\Event;
 use UnitEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class ContentResource extends Resource
+class EventResource extends Resource
 {
-    protected static ?string $model = Content::class;
+    protected static ?string $model = Event::class;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Content & Communication';
+    protected static string | UnitEnum | null $navigationGroup = 'Events';
     protected static ?int $navigationSort = 1;
-    protected static ?string $navigationLabel = 'Content Management';
+    protected static ?string $navigationLabel = 'Events Management';
 
     protected static ?string $recordTitleAttribute = 'title';
 
@@ -35,18 +32,14 @@ class ContentResource extends Resource
     {
         return $schema
             ->components([
-                Select::make('content_category_id')
+                Select::make('event_category_id')
                     ->relationship('category', 'title')
                     ->required(),
                 TextInput::make('title')
                     ->required(),
-                TextInput::make('summary'),
-                Textarea::make('body')
-                    ->required()
+                Textarea::make('summary')
                     ->columnSpanFull(),
-                FileUpload::make('header_image_path')
-                    ->image(),
-                Toggle::make('is_pinned')
+                DatePicker::make('scheduled_on')
                     ->required(),
             ]);
     }
@@ -61,10 +54,9 @@ class ContentResource extends Resource
                     ->sortable(),
                 TextColumn::make('title')
                     ->searchable(),
-                TextColumn::make('summary')
-                    ->searchable(),
-                IconColumn::make('is_pinned')
-                    ->boolean(),
+                TextColumn::make('scheduled_on')
+                    ->date()
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -91,7 +83,7 @@ class ContentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ManageContents::route('/'),
+            'index' => ManageEvents::route('/'),
         ];
     }
 }

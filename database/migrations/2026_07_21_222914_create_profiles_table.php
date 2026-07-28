@@ -13,21 +13,19 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('clan_id')
-                    ->constrained('clans')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
             
+            $table->foreignId('zodiac_id')
+                    ->constrained()
+                    ->cascadeOnUpdate()
+                    ->restrictOnDelete();
+
             $table->string('title')->nullable();
             $table->string('name');
             $table->enum('gender', ['male', 'female']);
             $table->date('dob')->nullable();
+            $table->unsignedTinyInteger('barga')->nullable();
             $table->string('photo')->nullable();
-            $table->string('phone')->nullable();
-            $table->enum('ancestral_address', ['kodi', 'manikharka', 'mulbari', 'saudara', 'andara']);
-            $table->enum('residence_type', ['local', 'city', 'abroad']);
-
+            $table->date('deceased_on')->nullable();
             $table->timestamps();
         });
     }

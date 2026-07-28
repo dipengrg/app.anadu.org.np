@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ContributionTiers;
 
+use App\Filament\Resources\Concerns\RestrictedToAdmins;
 use App\Filament\Resources\ContributionTiers\Pages\ManageContributionTiers;
 use App\Models\ContributionTier;
 use UnitEnum;
@@ -18,10 +19,12 @@ use Filament\Tables\Table;
 
 class ContributionTierResource extends Resource
 {
+    use RestrictedToAdmins;
+    
     protected static ?string $model = ContributionTier::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Platform Settings';
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 5;
     protected static ?string $navigationLabel = 'Contribution Tiers';
 
     protected static ?string $recordTitleAttribute = 'title';

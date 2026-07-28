@@ -34,18 +34,22 @@ class ProfileResource extends Resource
     {
         return $schema
             ->components([
-                Select::make('clan_id')
-                    ->relationship('clan', 'title')
-                    ->required(),
                 TextInput::make('title')
-                    ->helperText('Optional honorific, e.g. Mr., Mrs., Dr.'),
+                    ->helperText('Mr., Mrs., Ms. or Rank.'),
                 TextInput::make('name')
                     ->required(),
                 Select::make('gender')
                     ->options(['male' => 'Male', 'female' => 'Female'])
                     ->required(),
+                Select::make('zodiac_id')
+                    ->relationship('zodiac', 'title')
+                    ->required(),
                 DatePicker::make('dob')
                     ->maxDate(now()),
+                Select::make('marital_status')
+                    ->options(['single' => 'Single', 'married' => 'Married'])
+                    ->default('single')
+                    ->required(),
                 Section::make('photo')
                     ->schema([
                         FileUpload::make('photo')
@@ -53,21 +57,7 @@ class ProfileResource extends Resource
                             ->avatar()
                             ->directory('profile-photos')
                             ->visibility('public'),
-                    ]),
-                TextInput::make('phone')
-                    ->tel(),
-                Select::make('ancestral_address')
-                    ->options([
-                        'kodi' => 'Kodi',
-                        'manikharka' => 'Manikharka',
-                        'mulbari' => 'Mulbari',
-                        'saudara' => 'Saudara',
-                        'andara' => 'Andara',
                     ])
-                    ->required(),
-                Select::make('residence_type')
-                    ->options(['local' => 'Local', 'city' => 'City', 'abroad' => 'Abroad'])
-                    ->required(),
             ]);
     }
 
@@ -79,23 +69,21 @@ class ProfileResource extends Resource
                 ImageColumn::make('photo')
                     ->circular()
                     ->defaultImageUrl(fn () => 'https://ui-avatars.com/api/?name=Member&background=random'),
-                TextColumn::make('clan.title')
-                    ->searchable(),
                 TextColumn::make('title')
                     ->searchable(),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('gender')
                     ->badge(),
+                TextColumn::make('marital_status')
+                    ->badge(),
                 TextColumn::make('dob')
                     ->date()
                     ->sortable(),
-                TextColumn::make('phone')
-                    ->searchable(),
-                TextColumn::make('ancestral_address')
-                    ->badge(),
-                TextColumn::make('residence_type')
-                    ->badge(),
+                TextColumn::make('zodiac.title')
+                    ->label('Zodiac')
+                    ->badge()
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
