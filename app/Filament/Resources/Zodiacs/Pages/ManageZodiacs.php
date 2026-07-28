@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Zodiac\Pages;
+namespace App\Filament\Resources\Zodiacs\Pages;
 
-use App\Filament\Resources\Clans\ZodiacResource;
+use App\Filament\Resources\Zodiacs\ZodiacResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ManageRecords;
 

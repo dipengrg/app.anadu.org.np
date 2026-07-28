@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources\Clans;
+namespace App\Filament\Resources\Zodiacs;
 
 use App\Filament\Resources\Concerns\RestrictedToAdmins;
-use App\Filament\Resources\Zodiac\Pages\ManageZodiacs;
+use App\Filament\Resources\Zodiacs\Pages\ManageZodiacs;
 use App\Models\Zodiac;
 use UnitEnum;
 use Filament\Actions\BulkActionGroup;
