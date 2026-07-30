@@ -21,7 +21,7 @@ class PriestResource extends Resource
     protected static ?string $model = Priest::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'People & Membership';
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 4;
     protected static ?string $navigationLabel = 'Priest Management';
 
     public static function form(Schema $schema): Schema

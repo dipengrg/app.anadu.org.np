@@ -28,7 +28,7 @@ class MemberResource extends Resource
     protected static ?string $model = Member::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'People & Membership';
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 5;
     protected static ?string $navigationLabel = 'Member Management';
 
     protected static ?string $recordTitleAttribute = 'mid';
@@ -88,18 +88,6 @@ class MemberResource extends Resource
                         TextInput::make('phone')
                             ->tel()
                             ->maxLength(255),
-                        TextInput::make('designation')
-                            ->required()
-                            ->maxLength(255),
-                        TextInput::make('rank')
-                            ->numeric()
-                            ->required(),
-                        Select::make('role')
-                            ->options([
-                                'executive' => 'Executive',
-                                'general' => 'General',
-                            ])
-                            ->required(),
                         Select::make('ancestral_address')
                             ->options([
                                 'kodi' => 'Kodi',
@@ -146,11 +134,6 @@ class MemberResource extends Resource
                     ->label('Clan')
                     ->badge()
                     ->sortable(),
-                TextColumn::make('designation')
-                    ->searchable(),
-                TextColumn::make('role')
-                    ->badge()
-                    ->sortable(),
                 TextColumn::make('ancestral_address')
                     ->badge()
                     ->sortable(),
@@ -176,11 +159,6 @@ class MemberResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('role')
-                    ->options([
-                        'executive' => 'Executive',
-                        'general' => 'General',
-                    ]),
                 SelectFilter::make('residence_type')
                     ->options([
                         'local' => 'Local',
