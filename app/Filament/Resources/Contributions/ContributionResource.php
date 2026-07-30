@@ -31,13 +31,14 @@ class ContributionResource extends Resource
         return $schema
             ->components([
                 Select::make('profile_id')
-                    ->relationship('profile', 'name'),
-                TextInput::make('contribution_category_id')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('contribution_tier_id')
-                    ->required()
-                    ->numeric(),
+                    ->relationship('profile', 'name')
+                    ->searchable(),
+                Select::make('contribution_category_id')
+                    ->relationship('category', 'title')
+                    ->required(),
+                Select::make('contribution_tier_id')
+                    ->relationship('tier', 'title')
+                    ->required(),
                 TextInput::make('external_donor_name'),
                 TextInput::make('amount')
                     ->required()
@@ -55,14 +56,13 @@ class ContributionResource extends Resource
             ->columns([
                 TextColumn::make('profile.name')
                     ->searchable(),
-                TextColumn::make('contribution_category_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('contribution_tier_id')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('external_donor_name')
+                    ->label('External Donor')
                     ->searchable(),
+                TextColumn::make('category.title')
+                    ->sortable(),
+                TextColumn::make('tier.title')
+                    ->sortable(),
                 TextColumn::make('amount')
                     ->numeric()
                     ->sortable(),
