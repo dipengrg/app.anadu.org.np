@@ -2,10 +2,9 @@
 
 namespace App\Filament\Resources\Committees;
 
-use App\Filament\Resources\Committees\Pages\CreateCommittee;
-use App\Filament\Resources\Committees\Pages\EditCommittee;
-use App\Filament\Resources\Committees\Pages\ListCommittees;
+use App\Filament\Resources\Committees\Pages\ManageCommittees;
 use App\Models\Committee;
+use BackedEnum;
 use UnitEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -105,9 +104,7 @@ class CommitteeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListCommittees::route('/'),
-            'create' => CreateCommittee::route('/create'),
-            'edit' => EditCommittee::route('/{record}/edit'),
+            'index' => ManageCommittees::route('/'),
         ];
     }
 }
