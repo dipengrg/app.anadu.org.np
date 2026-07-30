@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create('committees', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('profile_id')
@@ -19,15 +19,9 @@ return new class extends Migration
                     ->cascadeOnUpdate()
                     ->restrictOnDelete();
 
-            $table->foreignId('clan_id')
-                    ->constrained()
-                    ->cascadeOnUpdate()
-                    ->restrictOnDelete();
-
-            $table->string('mid')->unique();
+            $table->unsignedTinyInteger('rank');
+            $table->string('designation');
             $table->string('phone')->nullable();
-            $table->enum('ancestral_address', ['kodi', 'manikharka', 'mulbari', 'saudara', 'andara']);
-            $table->enum('residence_type', ['local', 'city', 'abroad']);
             $table->date('started_on');
             $table->date('ended_on')->nullable();
             $table->string('end_reason')->nullable();
@@ -41,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('committees');
     }
 };
