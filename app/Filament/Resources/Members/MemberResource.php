@@ -2,7 +2,10 @@
 
 namespace App\Filament\Resources\Members;
 
-use App\Filament\Resources\Members\Pages\ManageMembers;
+use App\Filament\Resources\Members\Pages\CreateMember;
+use App\Filament\Resources\Members\Pages\EditMember;
+use App\Filament\Resources\Members\Pages\ListMembers;
+use App\Filament\Resources\Members\RelationManagers\DependentsRelationManager;
 use App\Models\Member;
 use UnitEnum;
 use Filament\Actions\BulkActionGroup;
@@ -12,9 +15,9 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -199,10 +202,19 @@ class MemberResource extends Resource
             ]);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            DependentsRelationManager::class,
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => ManageMembers::route('/'),
+            'index' => ListMembers::route('/'),
+            'create' => CreateMember::route('/create'),
+            'edit' => EditMember::route('/{record}/edit'),
         ];
     }
 }
