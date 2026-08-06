@@ -21,7 +21,7 @@ class MotherGroupResource extends Resource
     protected static ?string $model = MotherGroup::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'People & Membership';
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 5;
     protected static ?string $navigationLabel = 'Mother Groups';
 
     public static function form(Schema $schema): Schema

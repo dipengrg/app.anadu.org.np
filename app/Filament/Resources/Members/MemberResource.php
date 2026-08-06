@@ -28,7 +28,7 @@ class MemberResource extends Resource
     protected static ?string $model = Member::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'People & Membership';
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 3;
     protected static ?string $navigationLabel = 'Member Management';
 
     protected static ?string $recordTitleAttribute = 'mid';
