@@ -38,14 +38,6 @@ class Profile extends Model
     }
 
     /**
-     * @return HasOne<FamilyRelation, $this>
-     */
-    public function familyRelation(): HasOne
-    {
-        return $this->hasOne(FamilyRelation::class);
-    }
-
-    /**
      * @return HasMany<EventSessionParticipation, $this>
      */
     public function sessionParticipations(): HasMany
